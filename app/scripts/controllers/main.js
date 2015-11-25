@@ -8,7 +8,7 @@
  * Controller of the devfestApp
  */
 angular.module('devfestApp')
-  .controller('MainCtrl', function ($scope, $http, $window, $location, Config) {
+  .controller('MainCtrl', function($scope, $http, $window, $location, Config) {
     $scope.site = Config;
     $scope.gMapLazy = 'https://maps.google.com/maps/api/js';
     $scope.gMapURL = 'https://maps.google.com/maps/api/js?client=' + Config.googleAPI;
@@ -52,6 +52,11 @@ angular.module('devfestApp')
         .then(onComplete, onError);
     }
     
+    $scope.goto = function(link, c, a, l, v) {
+      $scope.gaClick(c, a, l, v);
+      $window.open(link);
+    };
+
     $scope.$on('$viewContentLoaded', function() {
       $window.ga('send', 'pageview', { page: $location.path() });
     });

@@ -8,13 +8,13 @@
  * Controller of the devfestApp
  */
 angular.module('devfestApp')
-  .controller('SpeakersCtrl', function ($scope, Ref, $firebaseArray, $timeout, $modal, $window, $location, Config) {
+  .controller('SpeakersCtrl', function($scope, Ref, $firebaseArray, $timeout, $uibModal, $window, $location, $confirm, Config) {
     $scope.site = Config;
     $scope.speakers = $firebaseArray(Ref.child('speakers'));
 
     $scope.openFormModal = function(speaker) {
       $scope.speaker = speaker;
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'modalSpeakerForm.html',
         controller: 'SpeakerModalCtrl',
@@ -35,7 +35,7 @@ angular.module('devfestApp')
 
     $scope.openInfoModal = function(speaker) {
       $scope.speaker = speaker;
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'modalInfoContent.html',
         controller: 'InfoModalCtrl',
@@ -63,12 +63,24 @@ angular.module('devfestApp')
     };
   
     $scope.delete = function(speaker) {
-      $scope.speakers.$remove(speaker);
+      $confirm({text: 'Are you sure you want to delete ' + speaker.name + '? (this cannot be undone)'})
+        .then(function() {
+          $scope.speakers.$remove(speaker);
+        });
     };
     
+    $scope.goto = function(link, c, a, l, v) {
+      $scope.gaClick(c, a, l, v);
+      $window.open(link);
+    };
+
     $scope.$on('$viewContentLoaded', function() {
       $window.ga('send', 'pageview', { page: $location.path() });
     });
+    
+    $scope.gaClick = function(category, action, label, value) {
+      $window.ga('send', 'event', category, action, label, value);
+    };
   });
 
 /**
@@ -79,7 +91,7 @@ angular.module('devfestApp')
  * Controller of the devfestApp
  */
 angular.module('devfestApp')
-  .controller('SpeakerModalCtrl', function ($scope, $modalInstance, speaker) {
+  .controller('SpeakerModalCtrl', function($scope, $uibModalInstance, speaker) {
     $scope.speaker = speaker;
     $scope.err = null;
     
@@ -88,7 +100,7 @@ angular.module('devfestApp')
         if ($scope.imageData) {
           speaker.image = $scope.imageData;
         }
-        $modalInstance.close({
+        $uibModalInstance.close({
           'action': 'edit',
           'speaker': speaker
         });
@@ -96,7 +108,7 @@ angular.module('devfestApp')
         if ($scope.imageData) {
           speaker.image = $scope.imageData;
         }
-        $modalInstance.close({
+        $uibModalInstance.close({
           'action': 'add',
           'speaker': speaker
         });
@@ -121,8 +133,8 @@ angular.module('devfestApp')
       document.getElementById('image').addEventListener('change', $scope.handleImageAdd, false);
     }, true);
     
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+    $scope.cancel = function() {
+      $uibModalInstance.dismiss('cancel');
     };
   });
 
@@ -134,11 +146,11 @@ angular.module('devfestApp')
  * Controller of the devfestApp
  */
 angular.module('devfestApp')
-  .controller('InfoModalCtrl', function ($scope, $modalInstance, $window, speaker) {
+  .controller('InfoModalCtrl', function($scope, $uibModalInstance, $window, speaker) {
     $scope.speaker = speaker;
 
     $scope.editSpeaker = function(speaker) {
-      $modalInstance.close({
+      $uibModalInstance.close({
         'action': 'edit',
         'speaker': speaker
       });
@@ -146,7 +158,7 @@ angular.module('devfestApp')
 
     $scope.deleteSpeaker = function(speaker) {
       if (confirm('Are you sure you want to delete this speaker?')) {
-        $modalInstance.close({
+        $uibModalInstance.close({
           'action': 'delete',
           'speaker': speaker
         });
@@ -175,7 +187,7 @@ angular.module('devfestApp')
       return false;
     };
     
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+    $scope.cancel = function() {
+      $uibModalInstance.dismiss('cancel');
     };
   });

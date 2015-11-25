@@ -8,7 +8,7 @@
  * Controller of the devfestApp
  */
 angular.module('devfestApp')
-  .controller('SponsorshipCtrl', function ($scope, Ref, $firebaseArray, $timeout, $modal, $window, $location, Config) {
+  .controller('SponsorshipCtrl', function($scope, Ref, $firebaseArray, $timeout, $uibModal, $window, $location, $confirm, Config) {
     $scope.site = Config;
     $scope.sponsors = $firebaseArray(Ref.child('sponsors'));
 
@@ -29,7 +29,7 @@ angular.module('devfestApp')
 
     $scope.openFormModal = function(sponsor) {
       $scope.sponsor = sponsor;
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'modalSponsorForm.html',
         controller: 'SponsorModalCtrl',
@@ -61,9 +61,15 @@ angular.module('devfestApp')
     };
 
     $scope.deleteSponsor = function(sponsor) {
-      if (confirm('Are you sure you want to delete this sponsor?')) {
-        $scope.sponsors.$remove(sponsor);
-      }
+      $confirm({text: 'Are you sure you want to delete ' + sponsor.company + '? (this cannot be undone)'})
+        .then(function() {
+          $scope.sponsors.$remove(sponsor);
+        });
+    };
+    
+    $scope.goto = function(link, c, a, l, v) {
+      $scope.gaClick(c, a, l, v);
+      $window.open(link);
     };
     
     $scope.$on('$viewContentLoaded', function(event) {
@@ -83,7 +89,7 @@ angular.module('devfestApp')
  * Controller of the devfestApp
  */
 angular.module('devfestApp')
-  .controller('SponsorModalCtrl', function ($scope, $modalInstance, sponsor) {
+  .controller('SponsorModalCtrl', function($scope, $uibModalInstance, sponsor) {
     $scope.sponsor = sponsor;
     $scope.err = null;
     
@@ -92,7 +98,7 @@ angular.module('devfestApp')
         if ($scope.imageData) {
           sponsor.image = $scope.imageData;
         }
-        $modalInstance.close({
+        $uibModalInstance.close({
           'action': 'edit',
           'sponsor': sponsor
         });
@@ -100,7 +106,7 @@ angular.module('devfestApp')
         if ($scope.imageData) {
           sponsor.image = $scope.imageData;
         }
-        $modalInstance.close({
+        $uibModalInstance.close({
           'action': 'add',
           'sponsor': sponsor
         });
@@ -125,7 +131,7 @@ angular.module('devfestApp')
       document.getElementById('image').addEventListener('change', $scope.handleImageAdd, false);
     }, true);
     
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+    $scope.cancel = function() {
+      $uibModalInstance.dismiss('cancel');
     };
   });
