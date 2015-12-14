@@ -33,10 +33,10 @@
           <div role="tabpanel" ng-show="isTab(1)" ng-repeat="session in sessions | filter:{track: '1'}:true | orderBy:'time'">
             <session-tabpanel model="session" edit-session="editSession(session)" delete-session="deleteSession(session)"></session-tabpanel>
           </div>
-          <div role="tabpanel" class="tab-pane fade in active" ng-show="isTab(2)" ng-repeat="session in sessions | filter:{track: '2'}:true">
+          <div role="tabpanel" ng-show="isTab(2)" ng-repeat="session in sessions | filter:{track: '2'}:true | orderBy:'time'">
             <session-tabpanel model="session" edit-session="editSession(session)" delete-session="deleteSession(session)"></session-tabpanel>
           </div>
-          <div role="tabpanel" class="tab-pane fade in active" ng-show="isTab(3)" ng-repeat="session in sessions | filter:{track: '3'}:true">
+          <div role="tabpanel" ng-show="isTab(3)" ng-repeat="session in sessions | filter:{track: '3'}:true | orderBy:'time'">
             <session-tabpanel model="session" edit-session="editSession(session)" delete-session="deleteSession(session)"></session-tabpanel>
           </div>
         </div>
