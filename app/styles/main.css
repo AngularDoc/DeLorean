@@ -733,19 +733,38 @@ p.section-title:after {
 }
 
 .session-description {
-	padding: 22px 45px 22px 30px;
+	padding: 10px 15px;
 }
 
-h4.session-title {
-	margin-bottom: 15px;
+.session-summary {
+  clear: both;
+  overflow: auto;
+  padding-right: 15px;
+  height: 200px;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+h5.session-title {
+	margin-bottom: 8px;
 }
 
 .session-speaker {
-	font-size: 14px;
-	font-family: "Droid", sans-serif;
-	font-style: italic;
-	color: #999;
-	margin-top: -4px;
+  font-size: 14px;
+  font-family: "Droid", sans-serif;
+  font-style: italic;
+  color: #999;
+  padding: 10px 0;
+  white-space: nowrap;
 }
 
 .session-speaker span {
