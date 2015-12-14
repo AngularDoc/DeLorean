@@ -73,7 +73,8 @@ angular.module('devfestApp')
  * Controller of the devfestApp
  */
 angular.module('devfestApp')
-  .controller('SessionModalCtrl', function($scope, $uibModalInstance, session) {
+  .controller('SessionModalCtrl', function($scope, Ref, $firebaseArray, $uibModalInstance, session) {
+    $scope.speakers = $firebaseArray(Ref.child('speakers'));
     $scope.session = session;
     $scope.err = null;
     
