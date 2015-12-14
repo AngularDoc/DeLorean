@@ -65,20 +65,41 @@
           <input type="text" id="time" class="form-control" ng-model="session.time" placeholder="HH:mm:ss" required />
         </div>
         <div class="form-group">
-          <label for="speaker">Speaker:</label>
-          <input type="text" id="speaker" class="form-control" ng-model="session.speaker" placeholder="Full Name" required />
-        </div>
-        <div class="form-group">
           <label for="track">Track #:</label>
           <select class="form-control" id="track" ng-model="session.track" required>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            <option value="1">Track 1</option>
+            <option value="2">Track 2</option>
+            <option value="3">Track 3</option>
           </select>
         </div>
         <div class="form-group">
+          <label for="experience">Experience Level:</label>
+          <select class="form-control" id="expereince" ng-model="session.experience" required>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Expert">Expert</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="speaker">Speaker:</label>
+          <select id="speaker"
+                  name="speaker"
+                  class="form-control"
+                  ng-model="session.speaker"
+                  ng-options="item.name as item.name for item in speakers | orderBy:'name'"
+                  required>
+          </select>
+      </div>
+        <div class="form-group">
           <label for="description">Description:</label>
-          <textarea name="description" id="description" class="form-control" ng-model="session.description" placeholder="Enter a description" required></textarea>
+          <textarea id="description"
+                    name="description"
+                    class="form-control"
+                    rows="8"
+                    ng-model="session.description"
+                    placeholder="Enter a description"
+                    required>
+          </textarea>
         </div>
       </form>
     </div>
