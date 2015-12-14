@@ -23,11 +23,14 @@
     </div>
     <div class="col-md-8 no-padding">
       <div class="session-description">
-        <h4 class="session-title">{{ session.title }}</h4>
-        <p>{{ session.description }}</p>
-        <div ng-show="session.speaker" class="session-speaker">
-          <span class="fa fa-user"></span> {{ session.speaker }}
+        <h5 class="session-title">{{ session.title }}</h5>
+        <div ng-show="session.speaker" class="session-speaker col-md-4">
+          <span class="fa fa-user"></span> <a href="#!/speakers" ng-bind="session.speaker"></a>
         </div>
+        <div ng-if="session.speaker" class="session-speaker col-md-4">
+          <strong>Experience Level: </strong> {{ session.experience }}
+        </div>
+        <div class="session-summary" ng-bind-html="session.description | newline"></div>
       </div>
     </div>
   </div>
