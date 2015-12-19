@@ -713,7 +713,9 @@ p.section-title:after {
 .session-meta > .session-meta-info > .session-info-time {
     font-family: "Montserrat", sans-serif;
     font-size: 20px;
+    margin-left: -5px;
     margin-bottom: 10px;
+    white-space: nowrap;
 }
 
 .session-meta > .session-meta-info > .session-info-time > span {

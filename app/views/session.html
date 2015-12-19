@@ -1,6 +1,6 @@
 <div class="session-wrapper">
   <div class="row">
-    <div class="col-md-4 no-padding">
+    <div class="col-md-4 col-xs-4 no-padding">
       <div class="session-meta">
         <div class="session-meta-thumbnail">
           <div class="color-overlay"></div>
@@ -10,7 +10,7 @@
           <div class="session-info-time">
             {{ getTime(session.time) | date:'shortTime' }}
           </div>
-          <div class="session-info-place">
+          <div class="session-info-place hidden-xs">
             {{ session.room }}
           </div>
           <div style="padding-top: 25px;">
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8 no-padding">
+    <div class="col-md-8 col-xs-6 no-padding">
       <div class="session-description">
         <h5 class="session-title">{{ session.title }}</h5>
         <div ng-show="session.speaker" class="session-speaker col-md-4">
