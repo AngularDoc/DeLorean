@@ -8,7 +8,7 @@
  * Controller of the devfestApp
  */
 angular.module('devfestApp')
-  .controller('ScheduleCtrl', function($scope, Ref, $firebaseArray, $timeout, $uibModal, $window, $location, $confirm, Config) {
+  .controller('ScheduleCtrl', function($scope, Ref, $firebaseArray, $timeout, $uibModal, $window, $location, $confirm) {
     $scope.sessions = $firebaseArray(Ref.child('sessions'));
     $scope.tab = 1;
 
