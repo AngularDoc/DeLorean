@@ -87,6 +87,10 @@ angular.module('devfestApp')
 //        templateUrl: 'views/account.html',
 //        controller: 'AccountCtrl'
 //      })
+      .whenAuthenticated('/notify', {
+        templateUrl: 'views/notify.html',
+        controller: 'PushCtrl'
+      })
       .otherwise({redirectTo: '/'});
   }])
 
