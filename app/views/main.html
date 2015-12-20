@@ -3,12 +3,12 @@
     <div class="vertical-center-wrapper">
       <div class="vertical-center-table">
         <div class="vertical-center-content">
-          <div class="hero-content row">
+          <div class="row">
             <div class="col-md-10">
               <img src="images/devfest.png" width="40%" alt="{{ site.eventName }}" />
               <div class="event-hero-info text-shadow-medium">
-                <small><span class="event-hero-icon fa fa-calendar"></span>{{ site.eventDate | date:'fullDate' }}</small><br />
-                <small><span class="event-hero-icon fa fa-university"></span>{{ site.eventLocation }}</small>
+                <small><span class="event-hero-icon fa fa-calendar hidden-xs"></span>{{ site.eventDate | date:'fullDate' }}</small><br />
+                <small><span class="event-hero-icon fa fa-university hidden-xs"></span>{{ site.eventLocation }}</small>
               </div>
               <div>
                 <a href ng-click="goto(site.speakerURL, 'button', 'click', 'Become A Speaker')" class="cta cta-default all-caps">Become A Speaker</a>
