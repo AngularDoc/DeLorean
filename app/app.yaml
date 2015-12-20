@@ -17,10 +17,22 @@ handlers:
   static_files: app\robots.txt
   upload: robots\.txt
 
+- url: /img
+  static_dir: img
+
+- url: /manifest\.json
+  static_files: manifest.json
+  upload: manifest\.json
+
+- url: /.well-known/acme-challenge/(.*)
+  script: cert.php
+
 - url: (.*)/
   static_files: app\1/index.html
   upload: app
+  secure: always
 
 - url: (.*)
   static_files: app\1
   upload: app
+  secure: always
