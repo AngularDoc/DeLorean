@@ -33,6 +33,7 @@
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild -->
+  <link rel="manifest" href="manifest.json">
 </head>
 <body ng-app="devfestApp">
   <!--[if lt IE 8]>
@@ -53,6 +54,24 @@
 
     ga('create', 'UA-49153111-4');
     ga('send', 'pageview');
+  </script>
+  
+  <script> 
+    window.addEventListener('load', function() {
+      var outputElement = document.getElementById('output');
+      navigator.serviceWorker.register('service-worker.js', { scope: './' })
+        .then(function(r) {
+          console.log('registered service worker');
+        })
+        .catch(function(whut) {
+          console.error('uh oh... ');
+          console.error(whut);
+        });
+       
+      window.addEventListener('beforeinstallprompt', function(e) {
+        outputElement.textContent = 'beforeinstallprompt Event fired';
+      });
+    });
   </script>
 
   <!-- build:js(.) scripts/vendor.js -->
