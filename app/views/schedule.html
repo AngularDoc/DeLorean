@@ -12,7 +12,24 @@
       </div>
       <div class="clearfix"></div>
       <div class="section-tab schedule-tab" role="tabpanel">
-        <ul class="nav nav-tabs centered" role="tablist">
+        <ul class="nav nav-tabs centered hidden-xs hidden-sm" role="tablist">
+          <li role="presentation" ng-class="{active: isTab(1)}">
+            <a href ng-click="setTab(1)" aria-controls="one" role="tab" data-toggle="tab">
+              Mobile / Android<span class="track-type">Track One</span>
+            </a>
+          </li>
+          <li role="presentation" ng-class="{active: isTab(2)}">
+            <a href ng-click="setTab(2)" aria-controls="two" role="tab" data-toggle="tab">
+              Cloud / Web<span class="track-type">Track Two</span>
+            </a>
+          </li>
+          <li role="presentation" ng-class="{active: isTab(3)}">
+            <a href ng-click="setTab(3)" aria-controls="three" role="tab" data-toggle="tab">
+              Workshops<span class="track-type">Track Three</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-tabs centered hidden-md hidden-lg" role="tablist">
           <li role="presentation" class="col-xs-10" ng-class="{active: isTab(1)}">
             <a href ng-click="setTab(1)" aria-controls="one" role="tab" data-toggle="tab">
               Mobile / Android<span class="track-type">Track One</span>
