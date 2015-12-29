@@ -15,7 +15,7 @@ angular.module('devfestApp')
       'allowRegister' : false, // set to false once your "admin" login has been setup to prevent unauthorized account creations
       
       // event details
-      'eventName'     : 'GDG DevFest KC', // typically 'DevFest [place]'
+      'eventName'     : 'DevFest KC', // typically 'DevFest [place]'
       'eventLocation' : 'Jack Reardon Convention Center', // location of event
       'eventAddress'  : '520 Minnesota Ave, Kansas City, KS 66101', // address of event
       'eventURL'      : 'http://devfest.gdgkc.org', // link to event website (ex. G+, Meetup, Eventbrite, etc)
