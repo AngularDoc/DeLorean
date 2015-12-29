@@ -35,5 +35,11 @@ angular.module('devfestApp')
       'facebook'      : 'GDGKansasCity', // Facebook handle
       'meetup'        : 'GDG-Kansas-City', // Meetup handle
       'github'        : 'GDGKansasCity', // GitHub Handle
-    };
+      
+      // Ionic app details
+      'ionicId'       : 'fe76e61a', // Find this on your Ionic App dashboard
+      'ionicAPI'      : btoa('16a87f37d004e01227a221ed94862ff99f371543d56c9c24' + ':'), // Find this in the Ionic settings page for your app
+      'androidPkg'    : 'org.gdgkc.devfest', // Android app package name
+      'iosPkg'        : '', // iTunes app path
+   };
   });

@@ -12,6 +12,9 @@ angular.module('devfestApp')
     $scope.site = Config;
     $scope.gMapLazy = 'https://maps.google.com/maps/api/js';
     $scope.gMapURL = 'https://maps.google.com/maps/api/js?client=' + Config.googleAPI;
+    
+    $scope.androidAppUrl = 'https://play.google.com/store/apps/details?id=' + Config.androidPkg + '&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1';
+    $scope.iosAppUrl = 'https://itunes.apple.com/us/app/' + Config.iosPkgPkg;
 
     var sHour = Config.eventStart.substring(0, Config.eventStart.indexOf(':'));
     var sMinutes = Config.eventStart.substring(Config.eventStart.indexOf(':') + 1, Config.eventStart.indexOf(':') + 3);
