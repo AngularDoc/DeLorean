@@ -142,9 +142,14 @@ angular.module('devfestApp')
  * Controller of the devfestApp
  */
 angular.module('devfestApp')
-  .controller('SessionModalCtrl', function($scope, Ref, $firebaseArray, $uibModalInstance, $confirm, session) {
+  .controller('SessionModalCtrl', function($scope, Ref, $firebaseArray, $uibModalInstance, $confirm, $window, Config, session) {
     $scope.speakers = $firebaseArray(Ref.child('speakers'));
     $scope.session = session;
+    var postText = 'Check out this talk "' + session.title + '" only at #' + Config.eventName.replace(/ /g, '');
+    
+    $scope.shareTwitter = function(session) {
+      $window.open('//twitter.com/share?text=' + encodeURIComponent(postText) + '&url=' + Config.eventURL, '_blank');
+    };
 
     $scope.editSession = function(session) {
       $uibModalInstance.close({
