@@ -1,5 +1,5 @@
 <section id="schedule" class="gray-bg">
-  <div class="container">
+  <div class="container schedule">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 centered">
         <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 centered">
@@ -8,53 +8,48 @@
             <!-- Add sessions (Auth required) -->
             <a ng-show-auth="" class="btn btn-sm btn-success" ng-click="openFormModal()">Add Session</a>
           </h2>
+          <h4><span class="hidden-xs hidden-sm">Click</span><span class="hidden-md hidden-lg">Tap</span> on a Session for more info</h4>
         </div>
       </div>
       <div class="clearfix"></div>
-      <div class="section-tab schedule-tab" role="tabpanel">
-        <ul class="nav nav-tabs centered hidden-xs hidden-sm" role="tablist">
-          <li role="presentation" ng-class="{active: isTab(1)}">
-            <a href ng-click="setTab(1)" aria-controls="one" role="tab" data-toggle="tab">
-              Mobile / Android<span class="track-type">Track One</span>
-            </a>
-          </li>
-          <li role="presentation" ng-class="{active: isTab(2)}">
-            <a href ng-click="setTab(2)" aria-controls="two" role="tab" data-toggle="tab">
-              Cloud / Web<span class="track-type">Track Two</span>
-            </a>
-          </li>
-          <li role="presentation" ng-class="{active: isTab(3)}">
-            <a href ng-click="setTab(3)" aria-controls="three" role="tab" data-toggle="tab">
-              Workshops<span class="track-type">Track Three</span>
-            </a>
-          </li>
-        </ul>
-        <ul class="nav nav-tabs centered hidden-md hidden-lg" role="tablist">
-          <li role="presentation" class="col-xs-10" ng-class="{active: isTab(1)}">
-            <a href ng-click="setTab(1)" aria-controls="one" role="tab" data-toggle="tab">
-              Mobile / Android<span class="track-type">Track One</span>
-            </a>
-          </li>
-          <li role="presentation" class="col-xs-10" ng-class="{active: isTab(2)}">
-            <a href ng-click="setTab(2)" aria-controls="two" role="tab" data-toggle="tab">
-              Cloud / Web<span class="track-type">Track Two</span>
-            </a>
-          </li>
-          <li role="presentation" class="col-xs-10" ng-class="{active: isTab(3)}">
-            <a href ng-click="setTab(3)" aria-controls="three" role="tab" data-toggle="tab">
-              Workshops<span class="track-type">Track Three</span>
-            </a>
-          </li>
-        </ul>
-        <div class="tab-content">
-          <div role="tabpanel" ng-show="isTab(1)" ng-repeat="session in sessions | filter:{track: '1'}:true | orderBy:'time'">
-            <session-tabpanel model="session" edit-session="editSession(session)" delete-session="deleteSession(session)"></session-tabpanel>
-          </div>
-          <div role="tabpanel" ng-show="isTab(2)" ng-repeat="session in sessions | filter:{track: '2'}:true | orderBy:'time'">
-            <session-tabpanel model="session" edit-session="editSession(session)" delete-session="deleteSession(session)"></session-tabpanel>
-          </div>
-          <div role="tabpanel" ng-show="isTab(3)" ng-repeat="session in sessions | filter:{track: '3'}:true | orderBy:'time'">
-            <session-tabpanel model="session" edit-session="editSession(session)" delete-session="deleteSession(session)"></session-tabpanel>
+      <div class="col-lg-12" ng-repeat="time in sessionTimes | orderBy:'toString()'" style="padding-bottom: 25px; color: #686868;">
+        <div class="col-lg-2 col-sm-2 col-xs-2" style="min-height: 160px; text-align: right;">
+          <span style="font-size: 32px;">{{ getTime(time) | date:'hh:mm' }}</span><br />
+          <span style="font-size: 28px;">{{ getEndTime(time) | date:'hh:mm' }}</span>
+        </div>
+        <div class="col-lg-10 col-sm-10 col-xs-10" style="min-height: 160px; border-right: 3px solid #C8C8C8; border-bottom: 2px solid #C8C8C8; padding: 0;">
+          <div class="col-lg-4"
+               ng-repeat="session in sessions | filter:{time: time}:true | orderBy:'track'"
+               ng-click="openInfoModal(session)"
+               style="min-height: 160px; padding: 10px; border-bottom: 1px solid #C8C8C8; background-color: white; cursor: pointer;">
+            <p ng-class="{
+                         'bg-success': (session.track == 1), 
+                         'bg-info': (session.track == 2), 
+                         'bg-danger': (session.track == 3)}"
+               ng-if="session.speaker"
+               class="hidden-xs hidden-sm"
+               style="height: 20px; padding: 0;"></p>
+            <div class="hidden-xs hidden-sm">
+              <span ng-bind-html="session.title" style="font-size: 18px;"></span><br /><br />
+              <div ng-show="session.speaker" style="font-size: 14px;">
+                <span class="fa fa-user"></span>&nbsp;
+                <a href="/speakers" ng-bind="session.speaker"></a>
+              </div>
+            </div>
+            <div class="hidden-md hidden-lg col-xs-11 col-sm-11">
+              <span ng-bind-html="session.title" style="font-size: 18px;"></span><br /><br />
+              <div ng-if="session.speaker" style="font-size: 14px;">
+                <span class="fa fa-user"></span>&nbsp;
+                <a href="/speakers" ng-bind="session.speaker"></a>
+              </div>
+            </div>
+            <div class="hidden-md hidden-lg col-xs-1 col-sm-1"
+                 style="min-height: 130px;"
+                 ng-if="session.speaker"
+                 ng-class="{
+                         'bg-success': (session.track == 1), 
+                         'bg-info': (session.track == 2), 
+                         'bg-danger': (session.track == 3)}"></div>
           </div>
         </div>
       </div>
@@ -75,7 +70,12 @@
         </div>
         <div class="form-group">
           <label for="room">Room:</label>
-          <input type="text" id="room" class="form-control" ng-model="session.room" placeholder="Ballroom A" required />
+          <select class="form-control" id="room" ng-model="session.room" required>
+            <option value="Leonardo">Leonardo</option>
+            <option value="Raphael">Raphael</option>
+            <option value="Michelangelo">Michelangelo</option>
+            <option value="Donatello">Donatello</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="time">Time:</label>
@@ -124,6 +124,31 @@
       <p ng-show="err" class="bg-danger">{{ err }}</p>
       <button class="btn btn-success" type="submit" ng-click="saveSession(session)">Save</button>
       <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+  </script>
+  
+  <!-- Session Info -->
+  <script type="text/ng-template" id="modalSessionContent.html">
+    <div class="modal-header">
+      <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h3 class="modal-title" ng-bind="session.title"></h3>
+    </div>
+    <div class="modal-body">
+      <div class="session-description">
+        <h5 class="session-title col-lg-10 col-md-10 col-sm-10 col-xs-10"></h5>
+        <div ng-if="session.speaker" class="session-speaker col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <strong>Speaker:</strong>&nbsp;<span ng-bind="session.speaker"></span><br />
+          <strong>Room:</strong>&nbsp;<span ng-bind="session.room"></span><br />
+          <strong>Experience Level:</strong>&nbsp;<span ng-bind="session.experience"></span>
+        </div>
+        <div ng-if="session.description" class="session-summary" ng-bind-html="session.description | newline"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <!-- Edit/Delete a session (Auth required) -->
+      <a ng-show-auth="" class="btn btn-sm btn-primary" ng-click="editSession(session)">Edit</a>
+      <a ng-show-auth="" class="btn btn-sm btn-danger" ng-click="deleteSession(session)">Delete</a>
+      <button ng-show-auth="" class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
     </div>
   </script>
 </section>

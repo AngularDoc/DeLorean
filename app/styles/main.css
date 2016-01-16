@@ -897,6 +897,9 @@ ul.speaker-social li a {
   .container {
     max-width: 730px;
   }
+  .container.schedule {
+    max-width: 1200px;
+  }
 
   /* Remove the padding we set earlier */
   .header,
