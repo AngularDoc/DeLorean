@@ -8,17 +8,21 @@
             <!-- Add sessions (Auth required) -->
             <a ng-show-auth="" class="btn btn-sm btn-success" ng-click="openFormModal()">Add Session</a>
           </h2>
-          <h4><span class="hidden-xs hidden-sm">Click</span><span class="hidden-md hidden-lg">Tap</span> on a Session for more info</h4>
+          <h5><span class="hidden-xs hidden-sm">Click</span><span class="hidden-md hidden-lg">Tap</span> on a Session for more info</h5>
         </div>
       </div>
       <div class="clearfix"></div>
       <div class="col-lg-12" ng-repeat="time in sessionTimes | orderBy:'toString()'" style="padding-bottom: 25px; color: #686868;">
-        <div class="col-lg-2 col-sm-2 col-xs-2" style="min-height: 160px; text-align: right;">
+        <div class="col-lg-2 col-md-2 hidden-sm hidden-xs" style="min-height: 160px; text-align: right;">
           <span style="font-size: 32px;">{{ getTime(time) | date:'hh:mm' }}</span><br />
           <span style="font-size: 28px;">{{ getEndTime(time) | date:'hh:mm' }}</span>
         </div>
-        <div class="col-lg-10 col-sm-10 col-xs-10" style="min-height: 160px; border-right: 3px solid #C8C8C8; border-bottom: 2px solid #C8C8C8; padding: 0;">
-          <div class="col-lg-4"
+        <div class="col-sm-2 col-xs-2 hidden-lg hidden-md" style="min-height: 160px; text-align: right; font-weight: bold;">
+          <span style="font-size: 16px;">{{ getTime(time) | date:'hh:mm' }}</span><br />
+          <span style="font-size: 14px;">{{ getEndTime(time) | date:'hh:mm' }}</span>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="min-height: 160px; border-right: 3px solid #C8C8C8; border-bottom: 2px solid #C8C8C8; padding: 0;">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
                ng-repeat="session in sessions | filter:{time: time}:true | orderBy:'track'"
                ng-click="openInfoModal(session)"
                style="min-height: 160px; padding: 10px; border-bottom: 1px solid #C8C8C8; background-color: white; cursor: pointer;">
@@ -36,7 +40,7 @@
                 <a href="/speakers" ng-bind="session.speaker"></a>
               </div>
             </div>
-            <div class="hidden-md hidden-lg col-xs-11 col-sm-11">
+            <div class="hidden-md hidden-lg col-xs-10 col-sm-10">
               <span ng-bind-html="session.title" style="font-size: 18px;"></span><br /><br />
               <div ng-if="session.speaker" style="font-size: 14px;">
                 <span class="fa fa-user"></span>&nbsp;
