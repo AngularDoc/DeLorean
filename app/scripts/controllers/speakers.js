@@ -8,7 +8,7 @@
  * Controller of the devfestApp
  */
 angular.module('devfestApp')
-  .controller('SpeakersCtrl', function($scope, Ref, $firebaseArray, $timeout, $uibModal, $window, $location, $confirm, Config) {
+  .controller('SpeakersCtrl', function($scope, Ref, $firebaseArray, $timeout, $uibModal, $window, $location, Config) {
     $scope.site = Config;
     $scope.speakers = $firebaseArray(Ref.child('speakers'));
 
@@ -63,10 +63,7 @@ angular.module('devfestApp')
     };
   
     $scope.delete = function(speaker) {
-      $confirm({text: 'Are you sure you want to delete ' + speaker.name + '? (this cannot be undone)'})
-        .then(function() {
-          $scope.speakers.$remove(speaker);
-        });
+      $scope.speakers.$remove(speaker);
     };
     
     $scope.goto = function(link, c, a, l, v) {
@@ -146,7 +143,7 @@ angular.module('devfestApp')
  * Controller of the devfestApp
  */
 angular.module('devfestApp')
-  .controller('InfoModalCtrl', function($scope, $uibModalInstance, $window, speaker) {
+  .controller('InfoModalCtrl', function($scope, $uibModalInstance, $window, $confirm, speaker) {
     $scope.speaker = speaker;
 
     $scope.editSpeaker = function(speaker) {
@@ -157,12 +154,13 @@ angular.module('devfestApp')
     };
 
     $scope.deleteSpeaker = function(speaker) {
-      if (confirm('Are you sure you want to delete this speaker?')) {
-        $uibModalInstance.close({
-          'action': 'delete',
-          'speaker': speaker
+      $confirm({text: 'Are you sure you want to delete ' + speaker.name + '? (this cannot be undone)'})
+        .then(function() {
+          $uibModalInstance.close({
+            'action': 'delete',
+            'speaker': speaker
+          });
         });
-      }
     };
     
     $scope.socialLink = function(network, profile) {
