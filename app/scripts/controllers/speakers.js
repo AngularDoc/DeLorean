@@ -179,6 +179,9 @@ angular.module('devfestApp')
         case 'github':
           link = 'https://github.com/' + profile;
           break;
+        case 'linkedin':
+          link = 'https://www.linkedin.com/in/' + profile;
+          break;
       }
       
       $window.open(link, '_blank');
