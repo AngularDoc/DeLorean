@@ -140,10 +140,10 @@
     <div class="modal-body">
       <div class="session-description">
         <h5 class="session-title col-lg-10 col-md-10 col-sm-10 col-xs-10"></h5>
-        <div ng-if="session.speaker" class="session-speaker col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <strong>Speaker:</strong>&nbsp;<span ng-bind="session.speaker"></span><br />
-          <strong>Room:</strong>&nbsp;<span ng-bind="session.room"></span><br />
-          <strong>Experience Level:</strong>&nbsp;<span ng-bind="session.experience"></span>
+        <div class="session-speaker col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <span ng-if="session.speaker"><strong>Speaker:</strong>&nbsp;<span ng-bind="session.speaker"></span></span><br />
+          <span ng-if="session.room"><strong>Room:</strong>&nbsp;<span ng-bind="session.room"></span></span><br />
+          <span ng-if="session.speaker"><strong>Experience Level:</strong>&nbsp;<span ng-bind="session.experience"></span></span>
         </div>
         <div ng-if="session.description" class="session-summary" ng-bind-html="session.description | newline"></div>
       </div>
