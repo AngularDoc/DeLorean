@@ -149,7 +149,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <img src="images/twitter.png" height="32px" style="cursor: pointer;" alt="Share on Twitter" title="Share on Twitter" ng-click="shareTwitter(session)" />
+      <img src="images/twitter.png" ng-if="session.speaker" height="32px" style="cursor: pointer;" alt="Share on Twitter" title="Share on Twitter" ng-click="shareTwitter(session)" />
       <!-- Edit/Delete a session (Auth required) -->
       <button ng-show-auth="" class="btn btn-sm btn-primary" ng-click="editSession(session)">Edit</button>
       <button ng-show-auth="" class="btn btn-sm btn-danger" ng-click="deleteSession(session)">Delete</button>
