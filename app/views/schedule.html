@@ -122,6 +122,14 @@
                     required>
           </textarea>
         </div>
+        <div class="form-group">
+          <label for="surveyLink">Survey Link</label>
+          <input type="url" class="form-control" id="surveyLink" name="surveyLink" ng-model="session.surveyLink" placeholder="https://docs.google.com/forms/d/..." />
+        </div>
+        <div class="form-group">
+          <label for="videoLink">Video Link</label>
+          <input type="url" class="form-control" id="videoLink" name="videoLink" ng-model="session.videoLink" placeholder="https://youtube.com/..." />
+        </div>
       </form>
     </div>
     <div class="modal-footer">
@@ -149,11 +157,13 @@
       </div>
     </div>
     <div class="modal-footer">
+      <button ng-show="session.surveyLink && showSurvey" class="btn btn-sm btn-info" style="float: left;" ng-click="openSurvey(session)">Survey</button>
+      <button ng-show="session.videoLink" class="btn btn-sm btn-success" style="float: left;" ng-click="openVideo(session)">Video</button>
       <img src="images/twitter.png" ng-if="session.speaker" height="32px" style="cursor: pointer;" alt="Share on Twitter" title="Share on Twitter" ng-click="shareTwitter(session)" />
       <!-- Edit/Delete a session (Auth required) -->
       <button ng-show-auth="" class="btn btn-sm btn-primary" ng-click="editSession(session)">Edit</button>
       <button ng-show-auth="" class="btn btn-sm btn-danger" ng-click="deleteSession(session)">Delete</button>
-      <button class="btn btn-default" type="button" ng-click="cancel()">Close</button>
+      <button ng-show-auth="" class="btn btn-default" type="button" ng-click="cancel()">Close</button>
     </div>
   </script>
 </section>
