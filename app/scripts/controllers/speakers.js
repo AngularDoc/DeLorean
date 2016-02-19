@@ -10,7 +10,12 @@
 angular.module('devfestApp')
   .controller('SpeakersCtrl', function($scope, Ref, $firebaseArray, $timeout, $uibModal, $window, $location, Config) {
     $scope.site = Config;
+    $scope.loading = true;
     $scope.speakers = $firebaseArray(Ref.child('speakers'));
+    
+    $scope.speakers.$loaded().then(function() {
+      $scope.loading = false;
+    });
 
     $scope.openFormModal = function(speaker) {
       $scope.speaker = speaker;
