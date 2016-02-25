@@ -172,6 +172,10 @@ angular.module('devfestApp')
     $scope.openVideo = function(session) {
       $window.open(session.videoLink, '_blank');
     };
+    
+    $scope.openSlides = function(session) {
+      $window.open(session.slidesLink, '_blank');
+    };
 
     $scope.editSession = function(session) {
       $uibModalInstance.close({
