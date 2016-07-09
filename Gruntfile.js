@@ -240,12 +240,21 @@ module.exports = function (grunt) {
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
       options: {
         assetsDirs: [
           '<%= yeoman.dist %>',
           '<%= yeoman.dist %>/images',
           '<%= yeoman.dist %>/styles'
-        ]
+        ],
+        patterns: {
+          js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
+        },
+        blockReplacements: {
+          js: function (block) {
+            return '<script type="text/javascript" src="' + block.dest + '" defer></script>';
+          }
+        }
       }
     },
 
@@ -347,6 +356,10 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '*.html',
             'views/{,*/}*.html',
+            'manifest.json',
+            'service-worker.js',
+            'sitemap.xml',
+            'img/*.*',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
           ]

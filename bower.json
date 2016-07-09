@@ -37,6 +37,11 @@
       "main": [
         "css/font-awesome.css"
       ]
+    },
+    "angular-confirm-modal": {
+      "main": [
+        "angular-confirm.min.js"
+      ]
     }
   }
 }
